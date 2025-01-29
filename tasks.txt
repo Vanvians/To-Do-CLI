@@ -1,0 +1,2 @@
+mute mic
+run away

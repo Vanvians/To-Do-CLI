@@ -1,12 +1,23 @@
-'''
-Allows users to add tasks, view tasks, delete tasks and save tasks to  a file.
-'''
+import os
 
-tasks = []
+TASKS_FILE = "tasks.txt"
+
+def load_tasks():
+    if os.path.exists(TASKS_FILE):
+        with open(TASKS_FILE, "r") as file:
+            return [line.strip() for line in file.readlines()]
+    return []
+
+def save_tasks():
+    with open(TASKS_FILE, "w") as file:
+        for task in tasks:
+            file.write(f"{task}\n")
+    print("Tasks saved to file.")
 
 def add_tasks(task):
     tasks.append(task)
     print(f"task added: {task}")
+    save_tasks()
 
 def view_tasks():
     if not tasks:
@@ -22,6 +33,8 @@ def delete_task(task_number):
         print(f"Removed task: {removed}")
     else:
         print("Invalid task number.")
+
+    save_tasks()
 
 def main():
     while True:
@@ -47,4 +60,5 @@ def main():
             print("Invalid command! Try again.")
 
 if __name__ == "__main__":
+    tasks = load_tasks()
     main()

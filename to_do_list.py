@@ -21,7 +21,7 @@ def add_tasks(task):
 
 def view_tasks():
     if not tasks:
-        print("No taks available.")
+        print("No tasks available.")
     else:
         print("\nTo-Do List")
         for index, task in enumerate(tasks,start=1):
@@ -36,9 +36,15 @@ def delete_task(task_number):
 
     save_tasks()
 
+def delete_all_tasks():
+    global tasks
+    tasks.clear()
+    print("All tasks have been deleted")
+    save_tasks()
+
 def main():
     while True:
-        print("\nOptions: add | view | delete | exit")
+        print("\nOptions: add | view | delete | delete all | exit")
         choice = input("Enter command: ").strip().lower()
         
         if choice == "add":
@@ -53,6 +59,8 @@ def main():
                 delete_task(task_number)
             except ValueError:
                 print("Invalid input! please enter a number.")
+        elif choice == "delete all":
+            delete_all_tasks()
         elif choice == "exit":
             print("Goodbye!")
             break
